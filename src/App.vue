@@ -8,8 +8,8 @@ const mode = ref<Mode>('encrypt');
 const selectedType = ref<'gcm' | 'cbc'>('gcm');
 const inputText = ref('');
 const secretKey = ref('');
-const result = ref('');
 const rawResult = ref('');
+
 const isBeautified = ref(false);
 const error = ref('');
 const isLoading = ref(false);
@@ -45,8 +45,8 @@ async function handleAction() {
   }
 
   error.value = '';
-  result.value = ''; // We'll use displayResult in template instead
   rawResult.value = '';
+
   isLoading.value = true;
 
   try {
@@ -103,17 +103,17 @@ function setMode(newMode: Mode) {
   mode.value = newMode;
   inputText.value = '';
   secretKey.value = '';
-  result.value = '';
   rawResult.value = '';
   error.value = '';
   isBeautified.value = false;
 }
 
+
 </script>
 
 <template>
   <div class="glass-card">
-    <h1>Ciphra</h1>
+    <h1>Encrypt Decrypt</h1>
     <p class="subtitle">Securely encrypt and decrypt your messages</p>
 
     <div class="mode-toggle">
