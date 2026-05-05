@@ -101,9 +101,14 @@ async function copyToClipboard() {
 
 function setMode(newMode: Mode) {
   mode.value = newMode;
+  inputText.value = '';
+  secretKey.value = '';
   result.value = '';
+  rawResult.value = '';
   error.value = '';
+  isBeautified.value = false;
 }
+
 </script>
 
 <template>
