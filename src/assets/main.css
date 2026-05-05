@@ -110,6 +110,42 @@ textarea.input-field {
   min-height: 100px;
 }
 
+.type-selection {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.type-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--surface-border);
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.type-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.type-option input {
+  accent-color: var(--primary);
+}
+
+.type-option:has(input:checked) {
+  border-color: var(--primary);
+  background: rgba(108, 122, 255, 0.1);
+  box-shadow: 0 0 15px rgba(108, 122, 255, 0.2);
+}
+
+
 .mode-toggle {
   display: flex;
   background: rgba(255, 255, 255, 0.05);
@@ -204,6 +240,38 @@ textarea.input-field {
   margin-bottom: 12px;
 }
 
+.result-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.beautify-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.beautify-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.beautify-toggle.active {
+  background: var(--primary-glow);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+
 .result-title {
   font-size: 0.75rem;
   font-weight: 700;
@@ -230,10 +298,12 @@ textarea.input-field {
 
 .result-text {
   word-break: break-all;
+  white-space: pre-wrap;
   font-family: 'Monaco', 'Consolas', monospace;
   font-size: 0.9rem;
   line-height: 1.5;
 }
+
 
 .error-msg {
   color: var(--error);

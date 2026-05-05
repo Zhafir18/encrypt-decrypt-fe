@@ -5,9 +5,9 @@
 export const CryptoService = {
   /**
    * Performs encryption using the backend API.
-   * Note: Backend requires the key to be exactly 32 bytes long.
+   * Note: Backend requires the key to be exactly 32 bytes long for AES-256.
    */
-  async processEncrypt(text: string, key: string): Promise<string> {
+  async processEncrypt(text: string, key: string, type: string): Promise<string> {
     const response = await fetch('/api/encrypt', {
       method: 'POST',
       headers: {
@@ -15,7 +15,7 @@ export const CryptoService = {
       },
       body: JSON.stringify({
         plaintext: text,
-        type: 'gcm',
+        type: type,
         key: key
       }),
     });
@@ -31,9 +31,9 @@ export const CryptoService = {
 
   /**
    * Performs decryption using the backend API.
-   * Note: Backend requires the key to be exactly 32 bytes long.
+   * Note: Backend requires the key to be exactly 32 bytes long for AES-256.
    */
-  async processDecrypt(text: string, key: string): Promise<string> {
+  async processDecrypt(text: string, key: string, type: string): Promise<string> {
     const response = await fetch('/api/decrypt', {
       method: 'POST',
       headers: {
@@ -41,7 +41,7 @@ export const CryptoService = {
       },
       body: JSON.stringify({
         ciphertext: text,
-        type: 'gcm',
+        type: type,
         key: key
       }),
     });
@@ -55,6 +55,7 @@ export const CryptoService = {
     return data.plaintext;
   }
 };
+
 
 
 
