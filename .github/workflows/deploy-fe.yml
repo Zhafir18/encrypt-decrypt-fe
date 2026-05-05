@@ -32,9 +32,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./encrypt-decrypt-fe
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fe:latest
           build-args: |
             VITE_API_URL=${{ secrets.VITE_API_URL }}
 
@@ -52,19 +52,20 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: zhafirghiffari
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2204
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fe:latest
             
-            docker stop hris-frontend || true
-            docker rm hris-frontend || true
+            docker stop encrypt-decrypt-fe || true
+            docker rm encrypt-decrypt-fe || true
             
             docker run -d \
-              --name hris-frontend \
+              --name encrypt-decrypt-fe \
               --network internal_network \
-              -p 5001:5001 \
+              -p 3001:3001 \
               --restart always \
-              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-fe:latest
             
             docker image prune -f
             docker logout ghcr.io
